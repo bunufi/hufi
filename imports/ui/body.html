@@ -1,0 +1,40 @@
+<body>
+  <div class="container">
+    <hr>
+    {{> offer}}
+    <hr>
+    {{> search}}
+  </div>
+</body>
+
+<template name="offer">
+  <form class="new-trip">
+    <h3>Offer a trip</h3>
+    <input type="text" name="where_to" placeholder="where to"/><br>
+    <input type="text" name="where_from" placeholder="where from"/><br>
+    <input name="when" id='datetimepicker4' placeholder="when" type="text" /><br>
+    <input class="btn btn-info" type="submit" value="Submit">
+  </form>
+</template>
+
+<template name="search">
+  <h3>Search for a trip</h3>
+
+  <div class="page-header clearfix">
+    <h4 class="pull-left">Offered trips</h4>
+    <div class="pull-right">
+      <input type="text" name="search" class="form-control" width="250px" placeholder="Find a trip...">
+    </div>
+  </div>
+
+  <ul class="list-group">
+    {{#each searchTrips}}
+      <li>
+        <button class="delete">&times;</button>
+        from {{to}} - to {{from}} - on {{when}}
+      </li>
+    {{else}}
+      <p class="alert alert-warning">Nothing found for {{query}}. Sorry, bub.</p>
+    {{/each}}
+  </ul>
+</template>
