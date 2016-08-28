@@ -36,7 +36,6 @@ Meteor.methods({
       // owner: this.userId,
       // username: Meteor.users.findOne(this.userId).username,
     });
-    Bert.alert( 'Success. A new trip was inserted!', 'success', 'fixed-top' );
   },
 
   'trips.remove'(taskId) {

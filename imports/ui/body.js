@@ -18,7 +18,21 @@ Template.body.events({
     const from = target.where_from.value;
     const when = target.when.value;
 
-    Meteor.call('trips.insert', to, from, when);
+    Bert.defaults = {
+      hideDelay: 35000,
+      // Accepts: a number in milliseconds.
+      style: 'fixed-top',
+      // Accepts: fixed-top, fixed-bottom, growl-top-left,   growl-top-right,
+      // growl-bottom-left, growl-bottom-right.
+      type: 'default'
+      // Accepts: default, success, info, warning, danger.
+    };
+
+
+    Meteor.call('trips.insert', to, from, when, function (){
+      Bert.alert( 'Success. A new trip was inserted!', 'success', 'fixed-top' );
+    });
+
 
     // Clear form
     target.where_to.value = '';

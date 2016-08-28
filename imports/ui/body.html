@@ -1,11 +1,31 @@
-<body>
+
+<template name="bodyTemplate">
+  <body>
+    <div class="container">
+
+      <hr>
+      {{> offer}}
+      <hr>
+      {{> search}}
+
+    </div>
+  </body>
+
+</template>
+
+<template name="applicationLayout">
   <div class="container">
-    <hr>
-    {{> offer}}
-    <hr>
-    {{> search}}
+
+    {{> Template.dynamic template=main}}
+
   </div>
-</body>
+</template>
+
+<template name="about">
+  <h1>about</h1>
+  <p>Mountains are calling and you must go.</p>
+  <p>Hufi will take you to there.</p>
+</template>
 
 <template name="offer">
   <form class="new-trip">
