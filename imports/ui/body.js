@@ -1,23 +1,14 @@
-import { Meteor } from 'meteor/meteor';
+
 import { Template } from 'meteor/templating';
 import { Trips } from '../api/trips.js';
 import './body.html';
 
-Template.body.rendered = function(){
+Template.bodyTemplate.rendered = function(){
     $('#datetimepicker4').datetimepicker();
-
-    Bert.defaults = {
-      hideDelay: 35000,
-      // Accepts: a number in milliseconds.
-      style: 'fixed-top',
-      // Accepts: fixed-top, fixed-bottom, growl-top-left,   growl-top-right,
-      // growl-bottom-left, growl-bottom-right.
-      type: 'default'
-      // Accepts: default, success, info, warning, danger.
-    };
 };
 
-Template.body.events({
+Template.bodyTemplate.events({
+
   'submit .new-trip'(event) {
     // Prevent default browser form submit
     event.preventDefault();
@@ -47,11 +38,7 @@ Template.search.onCreated( () => {
   template.searchQuery = new ReactiveVar();
 
   template.autorun( () => {
-    template.subscribe( 'trips', template.searchQuery.get(), () => {
-      setTimeout( () => {
-        template.searching.set( false );
-      }, 300 );
-    });
+    template.subscribe( 'trips', template.searchQuery.get() );
   });
 });
 
@@ -81,5 +68,20 @@ Template.search.events({
     if ( value === '' ) {
       template.searchQuery.set( value );
     }
+  }
+});
+
+Template.signup.events({
+  'submit form' ( event, template ) {
+    event.preventDefault();
+
+    let email    = template.find( "[name='emailAddress']" ).value,
+        password = template.find( "[name='password']" ).value;
+
+    Accounts.createUser( { email: email, password: password }, ( error ) => {
+      if ( error ) {
+        console.log( error.reason );
+      }
+    });
   }
 });
