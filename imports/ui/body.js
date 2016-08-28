@@ -1,22 +1,10 @@
-
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Trips } from '../api/trips.js';
 import './body.html';
 
 Template.body.rendered = function(){
     $('#datetimepicker4').datetimepicker();
-};
-
-Template.body.events({
-
-  'submit .new-trip'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
-    // Get value from form element
-    const target = event.target;
-    const to = target.where_to.value;
-    const from = target.where_from.value;
-    const when = target.when.value;
 
     Bert.defaults = {
       hideDelay: 35000,
@@ -27,12 +15,21 @@ Template.body.events({
       type: 'default'
       // Accepts: default, success, info, warning, danger.
     };
+};
 
+Template.body.events({
+  'submit .new-trip'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
+    // Get value from form element
+    const target = event.target;
+    const to = target.where_to.value;
+    const from = target.where_from.value;
+    const when = target.when.value;
 
     Meteor.call('trips.insert', to, from, when, function (){
       Bert.alert( 'Success. A new trip was inserted!', 'success', 'fixed-top' );
     });
-
 
     // Clear form
     target.where_to.value = '';

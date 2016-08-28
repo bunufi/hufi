@@ -2,22 +2,17 @@
 <template name="bodyTemplate">
   <body>
     <div class="container">
-
       <hr>
       {{> offer}}
       <hr>
       {{> search}}
-
     </div>
   </body>
-
 </template>
 
 <template name="applicationLayout">
   <div class="container">
-
     {{> Template.dynamic template=main}}
-
   </div>
 </template>
 
@@ -39,7 +34,6 @@
 
 <template name="search">
   <h3>Search for a trip</h3>
-
   <div class="page-header clearfix">
     <h4 class="pull-left">Offered trips</h4>
     <div class="pull-right">
@@ -57,4 +51,17 @@
       <p class="alert alert-warning">Nothing found for {{query}}. Sorry, bub.</p>
     {{/each}}
   </ul>
+</template>
+
+<template name="signup">
+  <div class="container">
+    {{> loginButtons}}<br><br>
+    {{#if currentUser}}
+      Logged in user:<br>
+      {{currentUser.username}}<br>
+      <br><br>
+      This is the information that is only visible when user is logged in.
+      <br><br><br><br>
+    {{/if}}
+  </div>
 </template>
